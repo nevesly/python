@@ -30,12 +30,17 @@ def calc(N):
     if N1 <= 0: return []
 
     base_arr = build_base_arr(N)
+    max_n = get_max(N + 1) / 9
+
     # 建造所有数据的列表生成器
     gen = itertools.product(xrange(0, 10), repeat=N1)
     ret = []
     for g in gen:
         l = gen2list(g)
         sum1 = list2int(l, base_arr)
+
+        if sum1 >= max_n: continue
+
         l.reverse()
         sum2 = list2int(l, base_arr)
         if sum1 * 9 == sum2:
