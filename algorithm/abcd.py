@@ -74,9 +74,56 @@ def calc1(N):
     return ret
 
 ##########################################
+# calc the result by its rules
+def calc2(N):
+    if N < 4: return []
+    Ret = []
+    X, Y, Z = [], [], []
+
+    A = N / 4
+    B = N - 4
+    C = N - 8
+
+    HD = [1, 0]
+    TL = [8, 9]
+
+    # [1, 0, [9] * B, 8, 9]
+    X = HD[:]
+    X.extend([9] * B)
+    X.extend(TL)
+    #print 'X:', X
+
+    # 1089 0...0 1089
+    if C >= 0:
+        Y0 = HD[:]
+        Y0.extend(TL)
+        Y = Y0[:]
+        Y.extend([0] * C)
+        Y.extend(Y0)
+    #print 'Y:', Y
+
+    # [10 [9] * M 89] * M1
+    M = N / 2 - 4
+    for i in xrange(0, M + 1):
+        M1 = [9] * i
+        W = HD[:]
+        W.extend(M1)
+        W.extend(TL)
+        A1 = N / len(W)
+        B1 = N % len(W)
+        if B1 != 0:
+            continue
+        Ret.append(W * A1)
+    #print 'Z:', Ret
+
+    Ret.append(X)
+    Ret.append(Y)
+    return Ret
+
+##########################################
 def main(N):
     t1 = time.time()
-    result = calc(N)
+    result = calc2(N)
     t2 = time.time()
 
     print u"长度:", N
