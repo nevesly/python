@@ -7,9 +7,14 @@ from bottle import error
 
 DEBUG = True
 
+import os
+PROG_DIR = os.path.dirname(os.path.abspath(__file__))
+PROJ_DIR = os.path.dirname(PROG_DIR)
+TEMPLATE_PATH.insert(0, os.path.join(PROJ_DIR, 'template'))
+STATIC = os.path.join(PROJ_DIR, 'static')
+
+# app start
 app = Bottle()
-TEMPLATE_PATH.insert(0,'/cygdrive/e/code/git/python/bottle/web/wedding/template')
-STATIC='/cygdrive/e/code/git/python/bottle/web/wedding/static'
 
 @app.route("/")
 def index():
