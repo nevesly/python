@@ -57,4 +57,4 @@ def check_login(username, password):
         return True
     return False
 
-run(app, host='localhost', port=8080, debug=DEBUG)
+run(app, host='0.0.0.0', port=8080, debug=DEBUG)
